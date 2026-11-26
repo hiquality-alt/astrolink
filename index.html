@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b2b">
+  <title>AstroLink — Daily Dive</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="AstroLink home">
+      <span class="brand-icon">✦</span>
+      <span>ASTROLINK</span>
+    </a>
+    <div class="top-actions">
+      <button id="helpBtn" class="icon-btn" aria-label="How to play">?</button>
+      <button id="statsBtn" class="icon-btn" aria-label="Statistics">▤</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="homeScreen" class="screen">
+      <div class="hero">
+        <div class="eyebrow">THE ASTROCADE COMMUNITY CHALLENGE</div>
+        <div class="mascot">🪼</div>
+        <h1>THE DAILY<br><span>DIVE</span></h1>
+        <p class="intro">Seven prompts. Twenty-five seconds each.<br>Think beyond the obvious.</p>
+
+        <div class="daily-info">
+          <div><strong>7</strong><span>PROMPTS</span></div>
+          <div><strong>25s</strong><span>PER PROMPT</span></div>
+          <div><strong>700</strong><span>MAX POINTS</span></div>
+        </div>
+
+        <button id="dailyBtn" class="primary-btn">▼ BEGIN DAILY DIVE</button>
+        <button id="unlimitedBtn" class="secondary-btn">PLAY UNLIMITED ↗</button>
+        <p id="dailyStatus" class="small-note"></p>
+      </div>
+
+      <section class="how-preview">
+        <h2>HOW DEEP CAN YOU GO?</h2>
+        <p>Give one answer that fits each prompt. The more unusual your accepted answer, the more points you earn.</p>
+        <div class="tier-preview">
+          <span class="tier-dot plankton"></span> Plankton
+          <span class="tier-dot rare"></span> Rare
+          <span class="tier-dot deep"></span> Deep cut
+          <span class="tier-dot legendary"></span> Legendary
+        </div>
+      </section>
+    </section>
+
+    <section id="gameScreen" class="screen hidden">
+      <div class="game-top">
+        <div><span class="muted">DIVE</span><strong id="roundNumber">1 / 7</strong></div>
+        <div><span class="muted">SCORE</span><strong id="scoreValue">0</strong></div>
+        <div><span class="muted">DEPTH</span><strong id="depthValue">0 m</strong></div>
+      </div>
+
+      <div class="progress-dots" id="progressDots"></div>
+
+      <div class="ocean-scene">
+        <div class="depth-label" id="zoneLabel">SUNLIGHT ZONE</div>
+        <div class="bubble bubble-one"></div>
+        <div class="bubble bubble-two"></div>
+        <div class="bubble bubble-three"></div>
+        <div class="sea-creature" id="seaCreature">🪼</div>
+        <div class="depth-line"></div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-label">YOUR PROMPT</div>
+        <h2 id="promptText">Name an Astrocade creator</h2>
+        <div class="timer-wrap">
+          <div class="timer-track"><div id="timerBar"></div></div>
+          <strong id="timerText">25</strong>
+        </div>
+
+        <form id="answerForm">
+          <input id="answerInput" type="text" maxlength="50"
+            placeholder="Type your answer..." autocomplete="off"
+            autocapitalize="words" required>
+          <button id="submitBtn" type="submit">SUBMIT ↗</button>
+        </form>
+        <button id="passBtn" class="pass-btn">PASS THIS PROMPT</button>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="landingScreen" class="screen hidden">
+      <div class="landing-card">
+        <div class="mascot">🪼</div>
+        <div class="eyebrow">PROMPT COMPLETE</div>
+        <h1 id="landingTier">RARE</h1>
+        <p id="landingAnswer" class="landing-answer"></p>
+        <div class="points-earned"><strong id="landingPoints">60</strong><span>POINTS</span></div>
+        <p id="landingMessage"></p>
+        <button id="continueBtn" class="primary-btn">CONTINUE DESCENT ↓</button>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen hidden">
+      <div class="result-card">
+        <div class="eyebrow">DIVE COMPLETE</div>
+        <div class="mascot">🏆</div>
+        <h1>YOU MADE IT!</h1>
+        <p class="result-subtitle">Your AstroLink dive report</p>
+        <div class="final-score"><strong id="finalScore">0</strong><span>/ 700 POINTS</span></div>
+        <div class="final-depth" id="finalDepth">0 METRES DEEP</div>
+        <div id="resultRows" class="result-rows"></div>
+        <div class="result-actions">
+          <button id="shareBtn" class="primary-btn">COPY RESULT</button>
+          <button id="homeBtn" class="secondary-btn">BACK HOME</button>
+        </div>
+        <p id="shareMessage" class="small-note"></p>
+      </div>
+    </section>
+
+    <section id="statsScreen" class="screen hidden">
+      <div class="panel">
+        <button class="back-btn" data-home>← BACK</button>
+        <h1>YOUR LOGBOOK</h1>
+        <div class="stats-grid">
+          <div><strong id="statDives">0</strong><span>DIVES</span></div>
+          <div><strong id="statBest">0</strong><span>BEST SCORE</span></div>
+          <div><strong id="statStreak">0</strong><span>STREAK</span></div>
+        </div>
+        <p class="small-note">Your statistics are saved in this browser.</p>
+      </div>
+    </section>
+
+    <section id="helpScreen" class="screen hidden">
+      <div class="panel">
+        <button class="back-btn" data-home>← BACK</button>
+        <h1>HOW TO PLAY</h1>
+        <p>Each dive has seven prompts. You have 25 seconds to enter one answer for each prompt.</p>
+        <p>Answers must be in the game's answer bank. If your answer is not accepted, try another one before time runs out.</p>
+        <p>Accepted answers earn points based on their assigned rarity. Every point adds 10 metres to your dive.</p>
+        <p>Daily Dive is one attempt per day. Unlimited lets you practise whenever you like.</p>
+        <div class="help-tiers">
+          <p><b>10</b> — Plankton</p>
+          <p><b>15</b> — Too Clever</p>
+          <p><b>30</b> — Schooler</p>
+          <p><b>60</b> — Rare</p>
+          <p><b>85</b> — Deep Cut</p>
+          <p><b>100</b> — One in a Krillion</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>ASTROLINK · MADE FOR THE ASTROCADE COMMUNITY</footer>
+  <script src="app.js"></script>
+</body>
+</html>
